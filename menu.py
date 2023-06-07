@@ -4,7 +4,8 @@ from helper import Nout
 def menu():
     n = Nout()
     print("Привет ты в программе заметки в консоли")
-    while True:
+    work =True
+    while work:
         os.system('cls' if os.name == 'nt' else 'clear')
         print()
         num, men = first_menu()
@@ -56,14 +57,16 @@ def menu():
             # Выход
             case 0:
                 if n.db == n.load_db():
-                    break
+                    work = False
                 else:
                     while True:
                         save_data = input("Есть не сохраненные данные, вы желаете их сохранить? [Д/н]:")
                         if save_data == "Д":
                             n.save_db()
+                            work = False
                             break
                         elif save_data == "н":
+                            work = False
                             break
 
 def first_menu():

@@ -14,13 +14,14 @@ class Nout:
 
         print("Новая заметка")
 
-        result = {self.db["__service_tag__"]["count"]: {
+        result = {str(self.db["__service_tag__"]["count"]): {
             "title": input("Введите название заметки: "),
             "text": input("Введите текст заметки: "),
             "create": datetime.now().strftime("%Y-%m-%d"),
             "update": None}}
         os.system('cls' if os.name == 'nt' else 'clear')
-        print(f"Заметка  {result[self.db['__service_tag__']['count']]['title']} добавлена")
+        print(f"Заметка  {result[list(result.keys())[0]]['title']} добавлена")
+        time.sleep(0.8)
         self.db.update(result)
         self.db["__service_tag__"]["count"]+=1
 
@@ -82,8 +83,9 @@ class Nout:
 
 if __name__ == '__main__':
     n = Nout()
-    n.edit_nout(1)
+    # n.edit_nout(1)
     # n.edit_nout(2)
     # n.edit_nout(13)
     # n.edit_nout("__service_tag__")
 
+    n.add_nout()
